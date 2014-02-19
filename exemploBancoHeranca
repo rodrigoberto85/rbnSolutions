@@ -1,0 +1,150 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <dos.h>
+#include <math.h>
+#include <string.h>
+
+
+class abre_arquivo {
+private:
+        FILE *fp;
+       friend class conta; 
+public:
+      
+       void abre_finalmente(); 
+       void fecha_finalmente();
+
+};       
+void abre_arquivo::abre_finalmente()
+{
+  fp = fopen("c:\\user\\xxxxx.txt", "w");
+}
+void abre_arquivo::fecha_finalmente()
+{
+  fclose(fp);
+}
+
+class cadastro {
+public: 
+        char endereco[40];
+        char telefone[12];
+        void cadastramento(char end[40], char tel[12]);
+};
+void cadastro::cadastramento(char end[40], char tel[12])
+{
+  strcpy(endereco,end);
+  strcpy(telefone,tel);
+}
+
+
+class  conta: public cadastro {
+private:
+      int numero;
+      char nome[30];
+      float saldo;
+
+public:
+       void abertura(char cliente[30], int num_conta);
+       void deposito (float dinheiro);
+       void retirada (float dinheiro);
+       void consulta();
+       int grava(abre_arquivo& x);
+};
+
+
+
+void conta::abertura(char cliente[30], int num_conta)
+{
+  strcpy(nome,cliente);
+  numero=num_conta;
+  saldo=0;
+}
+
+void conta::deposito (float dinheiro)
+{
+  saldo = saldo + dinheiro;
+}
+
+void conta::retirada (float dinheiro)
+{
+  saldo = saldo - dinheiro;
+}
+
+void conta::consulta()
+{
+  printf("\nCliente ==> %s  Conta numero ==> %d",nome,numero);
+  printf("\nEndereco ==> %s  Telefone ==> %d",endereco,telefone);
+  printf("\nSaldo ==> %f",saldo);
+  
+}
+
+int conta:: grava(abre_arquivo& x)
+{
+  int len;
+  char aux[10]=""; char grava_linha[80]="";
+  sprintf(aux,"%d",numero);  
+  strcat(grava_linha,nome);
+  strcat(grava_linha,";");
+  strcat(grava_linha,aux);
+  strcat(grava_linha,";");
+  strcat(grava_linha,endereco);
+  strcat(grava_linha,";");
+  strcat(grava_linha,telefone);
+  strcat(grava_linha,"\n");
+  len=strlen(grava_linha);
+  printf("\ntestando ==");system("pause");
+  
+  fwrite(&grava_linha,len, 1, x.fp);
+}
+
+
+
+
+main ()
+{
+  abre_arquivo t;
+  t.abre_finalmente();
+  conta *teste;
+  teste = new conta[3];
+  int ind=0; 
+
+  
+  
+
+  teste[ind].abertura("Pedro",12345);
+  teste[ind].cadastramento("Rua1","123456789");
+  teste[ind].deposito(70);
+  teste[ind].consulta();
+  teste[ind].retirada(20);
+  teste[ind].consulta();
+  
+ind=ind+1;
+
+  teste[ind].abertura("Jose",9999);
+  teste[ind].cadastramento("Rua2","987654321");
+  teste[ind].deposito(90);
+  teste[ind].consulta();
+  teste[ind].retirada(10);
+  teste[ind].consulta();
+  
+  printf("\n\nxxxxxxxxxxxxxxxxxxxxxxxx");
+  
+    teste[0].consulta();
+    
+    printf("\n\nxxxxxxxxxxxxxxxxxxxxxxxx");
+  
+    teste[1].consulta();
+
+    
+    teste[0].grava(t);
+    teste[1].grava(t);
+    t.fecha_finalmente();
+
+    
+
+  system("Pause");
+}
+
+
+  
