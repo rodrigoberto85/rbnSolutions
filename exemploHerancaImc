@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <conio.h>
+#include <dos.h>
+#include <math.h>
+
+class imc {
+      float massa;
+      float altura;
+public:
+       float i;  //armazena o imc 
+       void iniciar(float valor_massa, float valor_altura);
+       void calcular();
+};
+
+void imc::calcular(void)
+{
+      i=massa /(altura*altura);
+      printf ("\n\nO valor do imc e --> %f ",i);  
+}
+
+void imc::iniciar(float valor_massa, float valor_altura)
+{
+     massa=valor_massa;
+     altura=valor_altura;
+}
+
+
+class analise: public imc {
+      float sexo;  // 1= masculino  2=feminino
+public:
+      void analisar (float valor_sexo);
+};
+
+void analise::analisar(float valor_sexo)
+{
+     sexo=valor_sexo;
+     if ( sexo == 1 && ( i >= 18 && i <= 25 )) printf("Sexo Masculino - Normal \n");
+     if ( sexo == 1 && ( i < 18 || i > 25 )) printf("Sexo Masculino - Fora do Normal \n");
+     if ( sexo == 2 && ( i >= 19 && i <= 24 )) printf("Sexo Feminino - Normal \n");
+     if ( sexo == 2 && ( i < 19 || i > 24 )) printf("Sexo Feminino - Fora do Normal \n");
+}
+
+main ()
+{
+analise teste;
+
+teste.iniciar(70,1.8);
+teste.calcular();
+teste.analisar(1);
+
+teste.iniciar(200,1.8);
+teste.calcular();
+teste.analisar(1);
+
+teste.iniciar(70,1.8);
+teste.calcular();
+teste.analisar(2);
+
+teste.iniciar(200,1.8);
+teste.calcular();
+teste.analisar(2);
+
+
+   
+   getch();
+}
+
