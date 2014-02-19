@@ -1,0 +1,224 @@
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <dos.h>
+#include <math.h>
+#include <string.h>
+
+class acessorios {
+public: 
+        char nome1[40];
+        void insere(char a[40]);
+};
+void acessorios::insere(char a[40])
+{
+  strcpy(nome1,a);
+}
+
+
+class  carro: public acessorios {
+private:
+      char chassi[3];
+      char modelo[30];
+      friend class venda;
+      
+public:
+      void abertura1(char num1[3],char m[30]);
+      void consulta1();
+};
+
+
+void carro::abertura1(char num1[3],char m[30])
+{
+  strcpy(chassi,num1);
+  strcpy(modelo,m);
+  printf("\nCarro ==> %s",chassi);
+  printf("\nmodelo ==> %s",modelo);
+  system("pause");
+  
+}
+
+void carro::consulta1()
+{
+  printf("\nNumero ==> %s  modelo ==> %s",chassi,modelo);
+  printf("\nAcessorios ==> %s",nome1);
+  printf("\n");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+class cadastro {
+public: 
+        char nome[40];
+        char cpf[12];
+        char endereco[40];
+        char telefone[12];
+        void cadastramento(char n[40],char c[12], char end[40], char tel[12]);
+};
+void cadastro::cadastramento(char n[40], char c[12], char end[40], char tel[12])
+{
+  strcpy(nome,n);
+  strcpy(cpf,c);
+  strcpy(endereco,end);
+  strcpy(telefone,tel);
+}
+
+
+class  cliente: public cadastro {
+private:
+      char numero1[3];
+      friend class venda;
+public:
+      void abertura(char num[3]);
+      void consulta();
+};
+void cliente::abertura(char num[3])
+{
+  strcpy(numero1,num);
+  printf("\nCliente ==> %s",numero1);
+  system("pause");
+  
+}
+void cliente::consulta()
+{
+  printf("\nCliente ==> %s  nome ==> %s",numero1,nome);
+  printf("\nCPF ==> %s Endereco ==> %s  Telefone ==> %s",cpf,endereco,telefone);
+  printf("\n");
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class  venda {
+private:
+      char numero_venda[4];
+      char cliente_venda[30];
+      char carro_venda[20];
+public:
+      void fechamento(char num[3], cliente&x, carro&y);
+      void consulta();
+};
+
+void venda::fechamento(char num[3], cliente&x, carro&y)
+{
+  strcpy(numero_venda,num);
+  strcpy(cliente_venda,x.numero1);
+  strcpy(carro_venda,y.chassi);
+}
+
+
+void venda::consulta()
+{
+  printf("\n");
+  printf("\nVenda ==> %s",numero_venda);
+    printf("\nCliente ==> %s",cliente_venda);
+      printf("\nCarro ==> %s",carro_venda);
+      
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+main ()
+{
+  carro *teste1;   
+  teste1 = new carro[3];   
+     
+  cliente *teste;
+  teste = new cliente[3];
+  
+  venda *teste2;   
+  teste2 = new venda[3];
+  
+  
+  int ind=0; 
+
+  teste[ind].abertura("11");
+  teste[ind].cadastramento("Jose","cpf1","Rua1","11111111");
+
+  
+  teste1[ind].abertura1("aa","fiesta");
+  teste1[ind].insere("ar_condicionado");
+
+
+ind=ind+1;
+
+  teste[ind].abertura("22");
+  teste[ind].cadastramento("Joao","cpf2","Rua2","22222222");
+
+  
+  teste1[ind].abertura1("bb","focus");
+  teste1[ind].insere("vidro_eletrico");
+  
+  
+teste[0].consulta();  
+teste[1].consulta();
+
+teste1[0].consulta1();
+teste1[1].consulta1();
+
+  
+teste2[0].fechamento("001",teste[0],teste1[1]);
+teste2[0].consulta();
+
+teste2[1].fechamento("002",teste[1],teste1[0]);
+teste2[1].consulta();
+    
+
+  system("Pause");
+}
+
+
+  
