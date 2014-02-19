@@ -1,0 +1,38 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+class  conta {
+private:
+      int numero;
+      char nome[30];
+      float saldo;
+public:
+       void abertura(char cliente[30], int num_conta);
+       void deposito (float dinheiro);
+};
+
+void conta::abertura(char cliente[30], int num_conta)
+{
+  strcpy(nome,cliente);
+  numero=num_conta;
+  saldo=0;
+}
+
+void conta::deposito (float dinheiro)
+{
+  saldo = saldo + dinheiro;
+}
+
+
+
+
+main ()
+{
+  conta teste;
+
+  teste.abertura("Jose",12345);
+  teste.deposito(70);
+  
+  system("Pause");
+}
