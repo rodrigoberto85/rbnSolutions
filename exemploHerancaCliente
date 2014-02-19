@@ -1,0 +1,60 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <conio.h>
+#include <dos.h>
+#include <math.h>
+#include <string.h>
+
+class descricao {
+public: 
+        char marca[30];  char modelo[30];  char acessorio[30];
+        void insere(char aux1[30], char aux2[30], char aux3[30] );
+};
+void descricao::insere(char aux1[30], char aux2[30], char aux3[30])
+{
+  strcpy(marca,aux1); strcpy(modelo,aux2); strcpy(acessorio,aux3);
+}
+class  carro: public descricao {
+private:
+      char codigo[10];
+public:
+      void abertura(char aux1[10]);
+      void consulta();
+};
+void carro::abertura(char aux1[10])
+{ 
+   strcpy(codigo,aux1); 
+}
+void carro::consulta()
+{
+  printf("\nCodigo ==> %s  marca ==> %s",codigo,marca);
+  printf("\nModelo ==> %s  acessorio ==> %s",modelo,acessorio);
+  printf("\n");
+}
+
+main ()
+{
+  carro *teste1;   
+  teste1 = new carro[3];   
+     
+
+
+  teste1[0].abertura("001");
+  teste1[1].abertura("002");
+  
+  teste1[0].insere("ford","fiesta","ar_condicionado");
+  teste1[1].insere("ford","focus","vidro_eletrico");
+  
+
+teste1[0].consulta();
+teste1[1].consulta();
+
+  
+
+    
+
+  system("Pause");
+}
+
+
+  
