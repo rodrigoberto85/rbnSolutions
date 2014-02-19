@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <conio.h>
+#include <dos.h>
+#include <math.h>
+
+
+class paralelepipedo {
+      float larg, alt, prof;
+public:
+       void inicio(float aux1, float aux2, float aux3);
+       void inicio(float aux1);
+       void volume();
+       void volume1();
+};
+
+void paralelepipedo::inicio(float aux1)
+{
+   larg=aux1;
+}
+
+void paralelepipedo::inicio(float aux1, float aux2, float aux3)
+{
+    larg=aux1; alt=aux2; prof=aux3;
+}
+
+void paralelepipedo::volume1(void)
+{
+   printf ("\n\O volume e %f \n",larg*larg*larg);
+}
+
+void paralelepipedo::volume(void)
+{
+   printf ("\n\O volume e %f \n",larg*alt*prof);
+}
+
+
+
+main ()
+{
+
+   paralelepipedo teste;
+   teste.inicio(3);
+   teste.volume1();
+   
+   teste.inicio(3,4,5);
+   teste.volume();
+ 
+   
+   getch();
+}
+
