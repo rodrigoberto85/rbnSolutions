@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <conio.h>
+#include <dos.h>
+#include <math.h>
+
+class area {
+      float raio;
+public:
+       float c;
+       void calculo(void);
+       void inicio(float);
+};
+
+void area::calculo(void)
+{
+      c=3.1416*raio*raio;
+      printf ("\n\nO valor da area da base é --> %f ",c);
+      
+}
+
+void area::inicio(float v_raio)
+{
+     raio=v_raio;
+}
+
+
+class cilindro: public area {
+      float altura;
+public:
+       float volume_cilindro(void);
+       void inicio_cilindro(float);
+};
+
+float cilindro::volume_cilindro(void)
+{
+   return c*altura;
+}
+
+void cilindro::inicio_cilindro(float v_altura)
+{
+     altura=v_altura;
+}
+
+class cone: public area {
+      float altura1;
+public:
+       float volume_cone(void);
+       void inicio_cone(float);
+};
+
+float cone::volume_cone(void)
+{
+   return c*altura1/3;
+}
+
+void cone::inicio_cone(float v_altura)
+{
+     altura1=v_altura;
+}
+
+main ()
+{
+cilindro teste;
+cone teste1;
+float v_raio,v_altura;
+int aux;
+printf ("\nEntre com o valor do raio --> "); scanf("%f",&v_raio);
+printf ("\nEntre com o valor do altura --> "); scanf("%f",&v_altura);
+
+
+
+
+printf ("\nDigite 1 para cilindro e 2 para cone --> "); scanf("%d",&aux);
+if (aux==1)
+{
+teste.inicio(v_raio);
+teste.calculo();
+teste.inicio_cilindro(v_altura);
+printf ("\nO volume do cilindro e %f \n",teste.volume_cilindro());
+}
+if (aux==2)
+{
+teste1.inicio(v_raio);
+teste1.calculo();
+teste1.inicio_cone(v_altura);
+printf ("\nO volume do cone e %f \n",teste1.volume_cone());  
+}
+   getch();
+}
